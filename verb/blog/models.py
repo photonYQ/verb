@@ -9,7 +9,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=128)
 
-    def __str__():
+    def __str__(self):
         return "%s" % self.name
 
 
@@ -23,7 +23,7 @@ class Post(models.Model):
 
     tags = models.ManyToManyField(Tag)
 
-    def __str__():
+    def __str__(self):
         return "%s" % self.title
 
     class Meta:
@@ -38,9 +38,9 @@ class Comment(models.Model):
     reply = models.CharField(max_length=64, default="post")
     
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    followed = models.ForeignKey('self', related_name='follower', on_delete=models.CASCADE)
+    followed = models.ForeignKey('self', related_name='follower', null=True, on_delete=models.CASCADE)
 
-    def __str__():
+    def __str__(self):
         return "%s reply to %s" % (self.nick_name, self.reply)
 
 

@@ -21,7 +21,7 @@ class Post(models.Model):
     content = models.TextField()
     num_views = models.IntegerField(default=0)
 
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='posts')
 
     def __str__(self):
         return "%s" % self.title
@@ -37,7 +37,7 @@ class Comment(models.Model):
     email = models.EmailField(max_length=64)
     reply = models.CharField(max_length=64, default="post")
     
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     followed = models.ForeignKey('self', related_name='follower', null=True, on_delete=models.CASCADE)
 
     def __str__(self):

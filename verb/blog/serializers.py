@@ -8,13 +8,13 @@ from .models import Post, Tag, Comment, BlogInfo
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'title', 'create_time', 'update_time', 'summary', 'tags')
+        fields = ('id', 'title', 'create_time', 'update_time', 'summary', 'tags', 'comments')
 
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description', 'posts')
 
 
 class CommentSerializer(serializers.ModelSerializer):

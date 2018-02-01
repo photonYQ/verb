@@ -1,31 +1,53 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from rest_framework.generics import ListCreateAPIView, CreateAPIView
-from rest_framework import permissions
+from rest_framework import generics, permissions, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
-from .models import Post, Tag, Comment, BlogInfo
-from .serializers import PostSerializer, TagSerializer, CommentSerializer, BlogInfoSerializer
-
-
-class PostList(ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+from blog import models, serializers
 
 
-class TagList(ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
+class PostList(generics.ListCreateAPIView):
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = models.Post.objects.all()
+    serializer_class = serializers.PostListSerializer
+
+    def post(self, request, format=None):
+        serializer = serializers.PostSerializer(datar=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CommentList(ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = models.Post.objects.all()
+    serializer_class = serializers.PostSerializer
 
 
-class BlogIngo(CreateAPIView):
-    queryset = BlogInfo.objects.all()
-    serializer_class = BlogInfoSerializer
+class TagList(generics.ListCreateAPIView):
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = models.Tag.objects.all()
+    serializer_class = serializers.TagListSerializer
 
+
+class TagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Tag.objects.all()
+    serializer_class = serializers.TagSerializer
+
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = models.Comment.objects.all()
+    serializer_class = serializers.CommentSerializer
+
+
+class CommentDetail(generics.RetrieveDestroyAPIView):
+    queryset = models.Comment.objects.all()
+    serializer_class = serializers.CommentSerializer
+    
+
+class BlogIngo(generics.CreateAPIView):
+    queryset = models.BlogInfo.objects.all()
+    serializer_class = serializers.BlogInfoSerializer

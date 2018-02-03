@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'verb',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'your pass'
+        'PASSWORD': 'your pswd'
     }
 }
 

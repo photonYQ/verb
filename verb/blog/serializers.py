@@ -6,7 +6,7 @@ from blog import models
 
 
 class PostListSerializer(serializers.ModelSerializer):
-    tags = serializers.SlugRelatedField(many=True, slug_field='name', read_only=True)
+    tags = serializers.SlugRelatedField(many=True, slug_field='name', queryset=models.Tag.objects.all())
     class Meta:
         model = models.Post
         fields = ('title', 'create_time', 'update_time', 'summary', 'num_views', 'num_comments', 'tags')

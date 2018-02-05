@@ -55,6 +55,6 @@ class Comment(models.Model):
 class BlogInfo(models.Model):
     title = models.CharField(max_length=64)
     tip = models.CharField(max_length=128)
-    num_views = models.IntegerField()
+    num_views = models.IntegerField(default=0)
 
     

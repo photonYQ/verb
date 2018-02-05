@@ -1,51 +1,49 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from rest_framework import generics, permissions, status, mixins
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 
 from blog import models, serializers
 
 
-class PostList(generics.ListCreateAPIView):
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+class PostViewset(ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
-
-    def list(self, request, format=None):
-        queryset = self.get_queryset()
-        serializer = serializers.PostListSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
+    pagination_class = PageNumberPagination
+    
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.PostListSerializer
+        else:
+            return serializers.PostSerializer
 
 
-class TagList(generics.ListCreateAPIView):
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+class TagViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     queryset = models.Tag.objects.all()
-    serializer_class = serializers.TagListSerializer
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.TagListSerializer
+        else:
+            return serializers.TagSerializer
 
 
-class TagDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Tag.objects.all()
-    serializer_class = serializers.TagSerializer
-
-
-class CommentList(generics.ListCreateAPIView):
+class CommentViewSet(ModelViewSet):
     queryset = models.Comment.objects.all()
     serializer_class = serializers.CommentSerializer
 
-
-class CommentDetail(generics.RetrieveDestroyAPIView):
-    queryset = models.Comment.objects.all()
-    serializer_class = serializers.CommentSerializer
+    def get_permissions(self):
+        if self.action == "destroy":
+            permission_classes = [IsAuthenticatedOrReadOnly]
+        else:
+            permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
     
 
-class BlogIngo(generics.CreateAPIView):
+class BlogInfo(ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     queryset = models.BlogInfo.objects.all()
     serializer_class = serializers.BlogInfoSerializer

@@ -1,18 +1,22 @@
 # -*- coding:utf-8 -*-
 
-from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
 
 from blog import views
 
 
-urlpatterns = [
-    url(r'^posts/$', views.PostList.as_view()),
-    url(r'^tags/$', views.TagList.as_view()),
-    url(r'^posts/(?P<pk>[0-9]+)$', views.PostDetail.as_view()),
-    url(r'^tags/(?P<pk>[0-9]+)$', views.TagDetail.as_view()),
-    url(r'^comments/$', views.CommentList.as_view()),
-    url(r'^comments/(?P<pk>[0-9]+)$', views.CommentDetail.as_view()),
-]
+router = DefaultRouter()
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+router.register(r'posts', views.PostViewset, base_name="posts")
+
+router.register(r'tags', views.TagViewSet, base_name="tags")
+
+router.register(r'comments', views.CommentViewSet, base_name="comments")
+
+router.register(r'bloginfo', views.BlogInfo, base_name="blog_info")
+
+urlpatterns = [
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls'))
+]

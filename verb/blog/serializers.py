@@ -40,5 +40,5 @@ class TagSerializer(TagListSerializer):
 
 class BlogInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        models = models.BlogInfo
-        fields = ('id', 'title', 'tip')
+        model = models.BlogInfo
+        fields = ('id', 'title', 'tip', 'num_views')

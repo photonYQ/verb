@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "xfooter"
+        name: "footer"
     }
 </script>
 

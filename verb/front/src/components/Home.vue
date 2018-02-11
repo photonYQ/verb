@@ -1,35 +1,19 @@
 <template>
   <div id="home">
-    <xheader></xheader>
-
-    <xfooter></xfooter>
+    <navbar></navbar>
+    <router-view></router-view>
+    <footer></footer>
   </div>
 </template>
 
 <script>
-  import xheader from './Header';
-  import xfooter from './Footer';
-  import {getPostList, } from '../api/index';
+  import navbar from './Navbar';
+  import footer from './Footer';
 
   export default {
     name: "home",
     components: {
-      xheader, xfooter
-    },
-    data() {
-      return {
-        list: []
-      }
-    },
-    methods: {
-      getList() {
-        getPostList().then((response)=> {
-          console.log(response)
-        })
-      }
-    },
-    created() {
-      this.getList();
+      navbar, footer
     }
   }
 

@@ -7,13 +7,21 @@
         </div>
       </div>
     </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><router-link to="/posts">主页 <span class="sr-only">(current)</span></router-link></li>
+          <li><a href="#">关于</a></li>
+        </ul>
+      </div>
+    </nav>
   </header>
 </template>
 
 <script>
   import banner from "@/assets/banner.jpg"
   export default {
-    name: "xheader",
+    name: "navbar",
     data(){
       return {
         bannerUrl: banner

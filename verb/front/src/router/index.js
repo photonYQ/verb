@@ -9,12 +9,11 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: home
-    },
-    {
-      path: '/home',
-      name: 'Home',
-      component: home
+      component: home,
+      children: [{
+        path: 'posts',
+        component: resolve => require(['@/components/PostList.vue'], resolve)
+      }]
     }
   ]
 })

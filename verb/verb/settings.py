@@ -44,12 +44,16 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# cor header
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'verb.urls'
 
@@ -81,7 +85,7 @@ DATABASES = {
         'NAME': 'verb',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'yourt password'
+        'PASSWORD': 'your pswd'
     }
 }
 

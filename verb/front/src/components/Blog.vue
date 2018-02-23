@@ -4,7 +4,7 @@
       <Postlist></Postlist>
     </div>
     <div class="col-md-4 col-md-offset-8">
-      <Tagcloud></Tagcloud>
+      <Tagcloud :tag-list="tagList"></Tagcloud>
     </div>
   </div>
 </template>

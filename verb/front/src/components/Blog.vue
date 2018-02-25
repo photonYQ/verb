@@ -1,10 +1,12 @@
 <template>
-  <div class="content">
-    <div class="col-md-8">
-      <Postlist></Postlist>
-    </div>
-    <div class="col-md-4 col-md-offset-8">
-      <Tagcloud :tag-list="tagList"></Tagcloud>
+  <div class="container">
+    <div class="row">
+      <main class="col-md-8">
+        <Postlist :post-list="postList"></Postlist>
+      </main>
+      <aside class="col-md-4">
+        <Tagcloud :tag-list="tagList"></Tagcloud>
+      </aside>
     </div>
   </div>
 </template>
@@ -18,14 +20,17 @@
     computed: {
       ...mapState({
         tagList: ({tagList}) => tagList.items,
+        postList: ({postList}) => postList.items,
       })
     },
     created() {
       this.getTagList()
+      this.getPostList()
     },
     methods: {
       ...mapActions([
         'getTagList',
+        'getPostList',
       ])
     }
   }

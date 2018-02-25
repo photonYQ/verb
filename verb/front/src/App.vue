@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home">
     <Navbar></Navbar>
     <router-view></router-view>
     <Footer></Footer>
@@ -16,5 +16,9 @@
 </script>
 
 <style>
-
+ #home {
+   background: #ebebeb;
+   line-height: 1.75em;
+   position: relative;
+ }
 </style>

@@ -21,6 +21,7 @@
       ...mapState({
         tagList: ({tagList}) => tagList.items,
         postList: ({postList}) => postList.items,
+        tagDetail: ({tagDetail}) => tagDetail.tag,
       })
     },
     created() {
@@ -31,7 +32,10 @@
       ...mapActions([
         'getTagList',
         'getPostList',
-      ])
+      ]),
+      handleChange(tagId) {
+        this.getTagDetail({"tagId":tagId})
+      }
     }
   }
 </script>

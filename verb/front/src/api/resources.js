@@ -9,5 +9,5 @@ Vue.use(VueResource)
 Vue.http.options.crossOrigin = true
 
 export const PostResource = Vue.resource(API_ROOT + 'posts/')
-export const TagResource = Vue.resource(API_ROOT + 'tags/')
+export const TagResource = Vue.resource(API_ROOT + 'tags{/id}')
 

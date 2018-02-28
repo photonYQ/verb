@@ -2,9 +2,7 @@ import {PostResource, TagResource} from './resources'
 
 
 export default {
-  getPostList: () => { return PostResource.get() },
+  getPostList: (tagId) => { if (tagId) {return PostResource.get({'tag_id':tagId})} else {return PostResource.get()} },
 
   getTagList: () => { return TagResource.get() },
-
-  getTag: (tagId) => { return TagResource.get({id: tagId})}
 }

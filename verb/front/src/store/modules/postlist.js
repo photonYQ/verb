@@ -9,8 +9,8 @@ const state = {
 }
 
 const actions = {
-  getPostList({commit}) {
-    api.getPostList().then(response => {
+  getPostList({commit}, {tagId}) {
+    api.getPostList(tagId).then(response => {
       if (!response.ok) {
         return commit(GET_POST_LIST_FAILURE)
       }

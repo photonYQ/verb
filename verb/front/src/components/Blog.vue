@@ -21,23 +21,19 @@
       ...mapState({
         tagList: ({tagList}) => tagList.items,
         postList: ({postList}) => postList.items,
-        tagDetail: ({tagDetail}) => tagDetail.tag,
       })
     },
     created() {
       this.getTagList()
-      this.getPostList()
+      this.getPostList({"tagId":null})
     },
     methods: {
       ...mapActions([
         'getTagList',
         'getPostList',
-        'getTagDetail',
-        'changeTag',
       ]),
       handleChange(tagId) {
-        this.getTagDetail({"tagId":tagId})
-        this.changeTag({"tag": this.tagDetail})
+        this.getPostList({"tagId":tagId})
       }
     }
   }

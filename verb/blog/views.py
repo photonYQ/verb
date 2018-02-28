@@ -10,8 +10,14 @@ from blog import models, serializers
 
 class PostViewset(ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly, )
-    queryset = models.Post.objects.all()
     pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        queryset = models.Post.objects.all()
+        tag_id = self.request.query_params.get('tag_id', None)
+        if tag_id is not None:
+            queryset = queryset.filter(tags__id=tag_id)
+        return queryset
     
     def get_serializer_class(self):
         if self.action == "list":

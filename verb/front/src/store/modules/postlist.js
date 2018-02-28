@@ -16,6 +16,9 @@ const actions = {
       }
       commit(GET_POST_LIST_SUCCESS, { postList: response.data.results })
     })
+  },
+  changeTag({commit}, {tagDetail}) {
+    commit(GET_POST_LIST_SUCCESS, { postList: tagDetail.results })
   }
 }
 

@@ -32,9 +32,12 @@
       ...mapActions([
         'getTagList',
         'getPostList',
+        'getTagDetail',
+        'changeTag',
       ]),
       handleChange(tagId) {
         this.getTagDetail({"tagId":tagId})
+        this.changeTag({"tag": this.tagDetail})
       }
     }
   }

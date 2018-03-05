@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import tagList from './modules/taglist'
 import postList from './modules/postlist'
 import tagDetail from './modules/tagdetail'
+import post from './modules/post'
 
 
 Vue.use(Vuex)
@@ -12,5 +13,6 @@ export default new Vuex.Store({
     tagList,
     postList,
     tagDetail,
+    post,
   },
 })

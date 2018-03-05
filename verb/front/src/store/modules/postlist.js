@@ -5,29 +5,32 @@ import {
 } from "../types";
 
 const state = {
-  items: []
+  items: [],
+  nextPage: null,
+  prevPage: null
 }
 
 const actions = {
-  getPostList({commit}, {tagId}) {
-    api.getPostList(tagId).then(response => {
+  getPostList({commit}, {tagId, page}) {
+    api.getPostList(tagId, page).then(response => {
       if (!response.ok) {
         return commit(GET_POST_LIST_FAILURE)
       }
-      commit(GET_POST_LIST_SUCCESS, { postList: response.data.results })
+      commit(GET_POST_LIST_SUCCESS, { postList: response.data })
     })
-  },
-  changeTag({commit}, {tagDetail}) {
-    commit(GET_POST_LIST_SUCCESS, { postList: tagDetail.results })
   }
 }
 
 const mutations = {
   [GET_POST_LIST_FAILURE](state){
-    state.items=[]
+    state.items = []
+    state.nextPage = null
+    state.prevPage = null
   },
   [GET_POST_LIST_SUCCESS](state, action){
-    state.items = action.postList
+    state.items = action.postList.results
+    state.nextPage = action.postList.next
+    state.prevPage = action.postList.previous
   }
 }
 

@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="post-info" v-for="post in postList">
-      <h3>{{ post.title }}</h3>
+      <router-link :to="{ name: 'post', params: { pid: post.id } }">
+        <h3>{{ post.title }}</h3>
+      </router-link>
       <div class="base-info">
         <div class="create-info">
         <span class="label label-default">
           {{ post.create_time }}
         </span>
-          <span v-for="tag in post.tags" class="label label-info">
+        <span v-for="tag in post.tags" class="label label-info">
           {{ tag }}
         </span>
         </div>
@@ -27,13 +29,12 @@
     <nav aria-label="Page navigation">
       <ul class="pagination">
         <li>
-          <a href="#" aria-label="Previous">
+          <a @click.prevent="goPrev()" href="javascript:;" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li><a href="#">1</a></li>
         <li>
-          <a href="#" aria-label="Next">
+          <a @click.prevent="goNext()" href="javascript:;" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -44,7 +45,15 @@
 
 <script>
   export default {
-    props: ['postList', ]
+    props: ['postList', ],
+    methods: {
+      goPrev() {
+        this.$parent.getPostList({"tagId":null, "page":1})
+      },
+      goNext() {
+
+      }
+    }
   }
 </script>
 

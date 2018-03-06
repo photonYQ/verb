@@ -10,4 +10,5 @@ Vue.http.options.crossOrigin = true
 
 export const PostResource = Vue.resource(API_ROOT + 'posts{/id}{controller}/')
 export const TagResource = Vue.resource(API_ROOT + 'tags{/id}')
+export const CommentResource = Vue.resource(API_ROOT + 'comments{/id}')
 

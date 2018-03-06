@@ -15,7 +15,7 @@ class PostListSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Comment
-        fields = ('id', 'nick_name', 'email', 'content', 'reply', 'post', 'followed')
+        fields = ('id', 'nick_name', 'email', 'content', 'timestamp', 'reply', 'post', 'followed')
 
 
 class PostSerializer(PostListSerializer):

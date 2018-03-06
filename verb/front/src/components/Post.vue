@@ -25,18 +25,34 @@
           <hr>
           <div class="post-content">
             {{ post.content }}
-            <p>博文最后更新于:  {{ post.update_time }}</p>
+            <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 博文最后更新于:  {{ post.update_time }}</p>
           </div>
           <hr>
           <div class="post-comments">
-            <h4>评论区</h4>
+            <h4><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 评论区</h4>
             <ul>
-              <li v-if="post.comments!=[]">暂无评论</li>
+              <li v-if="post.comments.length == 0">暂无评论</li>
               <li v-for="comment in post.comments">
+                {{ comment.timestamp }}<br>
                 {{ comment.nick_name }}<{{ comment.email }}>回复{{ comment.reply }}<br>
                 {{ comment.content }}
               </li>
             </ul>
+            <form @submit.prevent="submitComment()">
+              <div class="form-group">
+                <label for="nick">昵称</label>
+                <input class="form-control" id="nick" placeholder="昵称">
+              </div>
+              <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" id="email" placeholder="邮箱">
+              </div>
+              <div class="form-group">
+                <label for="comment">评论</label>
+                <textarea class="form-control" id="comment" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-default">发表</button>
+            </form>
           </div>
         </div>
       </div>
@@ -61,7 +77,16 @@
     methods: {
       ...mapActions([
         'getPost',
+        'postComment',
       ]),
+      submitComment(){
+        let nick = document.getElementById("nick").value
+        let email = document.getElementById("email").value
+        let comment = document.getElementById("comment").value
+        let data = {"nick_name":nick, "email":email, "content":comment, "reply":"post", "post":this.pid, "followed":null}
+        console.log(data)
+        this.postComment({"comment":data})
+      }
     }
   }
 </script>
@@ -79,5 +104,8 @@
   }
   .post .view-info {
     float: right;
+  }
+  .label {
+    margin-right: 5px;
   }
 </style>

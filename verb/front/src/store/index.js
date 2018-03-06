@@ -4,6 +4,7 @@ import tagList from './modules/taglist'
 import postList from './modules/postlist'
 import tagDetail from './modules/tagdetail'
 import post from './modules/post'
+import comments from './modules/comments'
 
 
 Vue.use(Vuex)
@@ -14,5 +15,6 @@ export default new Vuex.Store({
     postList,
     tagDetail,
     post,
+    comments,
   },
 })

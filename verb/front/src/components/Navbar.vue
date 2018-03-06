@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="main-header" style="background-image: url(http://image.golaravel.com/5/c9/44e1c4e50d55159c65da6a41bc07e.jpg)">
+    <header class="main-header" style="background-image: url(http://static.ghostchina.com/image/6/d1/fcb3879e14429d75833a461572e64.jpg)">
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -31,7 +31,9 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+
+  }
 </script>
 
 <style scoped>

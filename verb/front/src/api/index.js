@@ -1,4 +1,4 @@
-import {PostResource, TagResource} from './resources'
+import {PostResource, TagResource, CommentResource} from './resources'
 
 
 export default {
@@ -13,5 +13,7 @@ export default {
 
   getTagList: () => { return TagResource.get() },
 
-  getPost: (pid) => { return PostResource.get({'id':pid})}
+  getPost: (pid) => { return PostResource.get({'id':pid})},
+
+  postComment: (data) => { return CommentResource.save(data) }
 }

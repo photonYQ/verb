@@ -45,13 +45,17 @@
 
 <script>
   export default {
-    props: ['postList', ],
+    props: ['postList', 'currentPage', 'nextPage', 'prevPage'],
     methods: {
       goPrev() {
-        this.$parent.getPostList({"tagId":null, "page":1})
+        if (this.prevPage) {
+          this.$parent.getPostList({"tagId":null, "page": this.currentPage-1})
+        }
       },
       goNext() {
-
+        if (this.nextPage) {
+          this.$parent.getPostList({"tagId":null, "page":this.currentPage+1})
+        }
       }
     }
   }

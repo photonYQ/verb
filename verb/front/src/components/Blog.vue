@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <main class="col-md-8">
-        <Postlist :post-list="postList" :prev-page="prevPage" :next-page="nextPage"></Postlist>
+        <Postlist :post-list="postList" :prev-page="prevPage" :next-page="nextPage" :current-page="currentPage"></Postlist>
       </main>
       <aside class="col-md-4">
         <Tagcloud :tag-list="tagList"></Tagcloud>
@@ -20,6 +20,7 @@
     computed: {
       ...mapState({
         tagList: ({tagList}) => tagList.items,
+        currentPage: ({postList}) => postList.currentPage,
         postList: ({postList}) => postList.items,
         prevPage: ({postList}) => postList.prevPage,
         nextPage: ({postList}) => postList.nextPage,

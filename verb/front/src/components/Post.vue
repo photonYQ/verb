@@ -24,7 +24,7 @@
           </div>
           <hr>
           <div class="post-content">
-            {{ post.content }}
+            <div v-html="compiledContent"></div>
             <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 博文最后更新于:  {{ post.update_time }}</p>
           </div>
           <hr>
@@ -62,13 +62,17 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import marked from "marked"
 
   export default {
     computed: {
       ...mapState({
         post: ({post}) => post.item,
         pid: ({route}) => route.params.pid
-      })
+      }),
+      compiledContent: function () {
+        return marked(this.post.content, { santitize: true })
+      }
     },
     created () {
       const pid = this.$route.params.pid
